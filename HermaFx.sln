@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HermaFx.Castle.Tests", "Her
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HermaFx.Mvc", "HermaFx.Mvc\HermaFx.Mvc.csproj", "{9858798B-F093-4885-B186-7971DA6CF47B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HermaFx.Mvc.Tests", "HermaFx.Mvc.Tests\HermaFx.Mvc.Tests.csproj", "{879BD02B-8B63-4621-9580-4FED0B8C726B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Beta|Any CPU = Beta|Any CPU
@@ -97,6 +99,14 @@ Global
 		{9858798B-F093-4885-B186-7971DA6CF47B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9858798B-F093-4885-B186-7971DA6CF47B}.ReleaseBus|Any CPU.ActiveCfg = Release|Any CPU
 		{9858798B-F093-4885-B186-7971DA6CF47B}.ReleaseBus|Any CPU.Build.0 = Release|Any CPU
+		{879BD02B-8B63-4621-9580-4FED0B8C726B}.Beta|Any CPU.ActiveCfg = Release|Any CPU
+		{879BD02B-8B63-4621-9580-4FED0B8C726B}.Beta|Any CPU.Build.0 = Release|Any CPU
+		{879BD02B-8B63-4621-9580-4FED0B8C726B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{879BD02B-8B63-4621-9580-4FED0B8C726B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{879BD02B-8B63-4621-9580-4FED0B8C726B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{879BD02B-8B63-4621-9580-4FED0B8C726B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{879BD02B-8B63-4621-9580-4FED0B8C726B}.ReleaseBus|Any CPU.ActiveCfg = Release|Any CPU
+		{879BD02B-8B63-4621-9580-4FED0B8C726B}.ReleaseBus|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
