@@ -2,13 +2,13 @@
 
 namespace HermaFx.Mvc.Grid.DataAnnotations
 {
-    internal interface IGridAnnotaionsProvider
-    {
-        GridColumnAttribute GetAnnotationForColumn<T>(PropertyInfo pi);
-        GridHiddenColumnAttribute GetAnnotationForHiddenColumn<T>(PropertyInfo pi);
+	public interface IGridAnnotationsProvider
+	{
+		GridColumnAttribute GetAnnotationForColumn<T>(PropertyInfo pi);
+		GridHiddenColumnAttribute GetAnnotationForHiddenColumn<T>(PropertyInfo pi);
 
-        bool IsColumnMapped(PropertyInfo pi);
+		bool IsColumnMapped(PropertyInfo pi);
 
-        GridTableAttribute GetAnnotationForTable<T>();
-    }
+		GridTableAttribute GetAnnotationForTable<T>();
+	}
 }

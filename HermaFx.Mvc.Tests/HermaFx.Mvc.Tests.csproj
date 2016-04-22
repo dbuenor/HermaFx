@@ -90,7 +90,6 @@
     <Compile Include="Grid\DataAnnotations\Models\TestGridAnnotationModel.cs" />
     <Compile Include="Grid\Filtering\FilterTests.cs" />
     <Compile Include="Grid\Helpers.cs" />
-    <Compile Include="Grid\HtmlOptionsTests.cs" />
     <Compile Include="Grid\Html\HtmlOptionsTests.cs" />
     <Compile Include="Grid\Pagination\GridPagerTests.cs" />
     <Compile Include="Grid\Renderers\RendererTests.cs" />

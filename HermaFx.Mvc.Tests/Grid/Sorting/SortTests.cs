@@ -3,245 +3,246 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
-using GridMvc.Filtering;
-using GridMvc.Sorting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using NUnit.Framework;
 using Moq;
+
+using HermaFx.Mvc.Grid.Filtering;
 
 namespace HermaFx.Mvc.Grid.Sorting
 {
-    /// <summary>
-    /// Summary description for SortTests
-    /// </summary>
-    [TestClass]
-    public class SortTests
-    {
-        private TestGrid _grid;
-        private TestRepository _repo;
+	/// <summary>
+	/// Summary description for SortTests
+	/// </summary>
+	[TestFixture]
+	public class SortTests
+	{
+		private TestGrid _grid;
+		private TestRepository _repo;
 
-        [TestInitialize]
-        public void Init()
-        {
-            HttpContext.Current = new HttpContext(
-                new HttpRequest("", "http://tempuri.org", ""),
-                new HttpResponse(new StringWriter()));
+		[OneTimeSetUp]
+		public void Init()
+		{
+			HttpContext.Current = new HttpContext(
+				new HttpRequest("", "http://tempuri.org", ""),
+				new HttpResponse(new StringWriter()));
 
-            _repo = new TestRepository();
-            _grid = new TestGrid(_repo.GetAll());
-        }
+			_repo = new TestRepository();
+			_grid = new TestGrid(_repo.GetAll());
+		}
 
-        [TestMethod]
-        public void TestSortingStringDescending()
-        {
-            _grid.Columns.Add(x => x.Title).Sortable(true);
-            if (
-                !ValidateSorting<string,  object>(_grid, x => x.Title,  "Title", GridSortDirection.Descending, null, null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingStringDescending()
+		{
+			_grid.Columns.Add(x => x.Title).Sortable(true);
+			if (
+				!ValidateSorting<string, object>(_grid, x => x.Title, "Title", GridSortDirection.Descending, null, null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingStringDescendingWithCustomColumnInternalName()
-        {
-            _grid.Columns.Add(x => x.Title, "someid").Sortable(true);
-            if (
-                !ValidateSorting<string,  object>(_grid, x => x.Title, "someid",
-                                                         GridSortDirection.Descending, null, null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingStringDescendingWithCustomColumnInternalName()
+		{
+			_grid.Columns.Add(x => x.Title, "someid").Sortable(true);
+			if (
+				!ValidateSorting<string, object>(_grid, x => x.Title, "someid",
+														 GridSortDirection.Descending, null, null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingStringAscending()
-        {
-            _grid.Columns.Add(x => x.Title).Sortable(true);
-            if (
-                !ValidateSorting<string,  object>(_grid, x => x.Title, "Title",
-                                                         GridSortDirection.Ascending, null, null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingStringAscending()
+		{
+			_grid.Columns.Add(x => x.Title).Sortable(true);
+			if (
+				!ValidateSorting<string, object>(_grid, x => x.Title, "Title",
+														 GridSortDirection.Ascending, null, null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingStringAscendingWithCustomColumnInternalName()
-        {
-            _grid.Columns.Add(x => x.Title, "someid").Sortable(true);
-            if (
-                !ValidateSorting<string,  object>(_grid, x => x.Title, "someid",
-                                                         GridSortDirection.Ascending, null, null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingStringAscendingWithCustomColumnInternalName()
+		{
+			_grid.Columns.Add(x => x.Title, "someid").Sortable(true);
+			if (
+				!ValidateSorting<string, object>(_grid, x => x.Title, "someid",
+														 GridSortDirection.Ascending, null, null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingIntAscending()
-        {
-            _grid.Columns.Add(x => x.Id).Sortable(true);
-            if (
-                !ValidateSorting<int,  object>(_grid, x => x.Id,"Id", GridSortDirection.Ascending, null,
-                                                   null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingIntAscending()
+		{
+			_grid.Columns.Add(x => x.Id).Sortable(true);
+			if (
+				!ValidateSorting<int, object>(_grid, x => x.Id, "Id", GridSortDirection.Ascending, null,
+												   null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingIntDescending()
-        {
-            _grid.Columns.Add(x => x.Id).Sortable(true);
-            if (
-                !ValidateSorting<int,  object>(_grid, x => x.Id, "Id", GridSortDirection.Descending, null,
-                                                   null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingIntDescending()
+		{
+			_grid.Columns.Add(x => x.Id).Sortable(true);
+			if (
+				!ValidateSorting<int, object>(_grid, x => x.Id, "Id", GridSortDirection.Descending, null,
+												   null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingChildStringAscending()
-        {
-            _grid.Columns.Add(x => x.Child.ChildTitle).Sortable(true);
-            if (
-                !ValidateSorting<string,  object>(_grid, x => x.Child.ChildTitle, "Child.ChildTitle", GridSortDirection.Ascending, null, null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingChildStringAscending()
+		{
+			_grid.Columns.Add(x => x.Child.ChildTitle).Sortable(true);
+			if (
+				!ValidateSorting<string, object>(_grid, x => x.Child.ChildTitle, "Child.ChildTitle", GridSortDirection.Ascending, null, null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingChildStringDescending()
-        {
-            _grid.Columns.Add(x => x.Child.ChildTitle).Sortable(true);
-            if (
-                !ValidateSorting<string, object>(_grid, x => x.Child.ChildTitle, 
-                                                         "Child.ChildTitle", GridSortDirection.Descending, null, null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingChildStringDescending()
+		{
+			_grid.Columns.Add(x => x.Child.ChildTitle).Sortable(true);
+			if (
+				!ValidateSorting<string, object>(_grid, x => x.Child.ChildTitle,
+														 "Child.ChildTitle", GridSortDirection.Descending, null, null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingChildDateTimeDescending()
-        {
-            _grid.Columns.Add(x => x.Child.ChildCreated).Sortable(true);
-            if (
-                !ValidateSorting<DateTime,  object>(_grid, x => x.Child.ChildCreated, 
-                                                             "Child.ChildCreated", GridSortDirection.Descending, null,
-                                                             null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingChildDateTimeDescending()
+		{
+			_grid.Columns.Add(x => x.Child.ChildCreated).Sortable(true);
+			if (
+				!ValidateSorting<DateTime, object>(_grid, x => x.Child.ChildCreated,
+															 "Child.ChildCreated", GridSortDirection.Descending, null,
+															 null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingChildDateTimeDescendingWithCustomInternalColumnName()
-        {
-            _grid.Columns.Add(x => x.Child.ChildCreated, "someid").Sortable(true);
-            if (
-                !ValidateSorting<DateTime, object>(_grid, x => x.Child.ChildCreated,
-                                                             "someid", GridSortDirection.Descending, null,
-                                                             null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingChildDateTimeDescendingWithCustomInternalColumnName()
+		{
+			_grid.Columns.Add(x => x.Child.ChildCreated, "someid").Sortable(true);
+			if (
+				!ValidateSorting<DateTime, object>(_grid, x => x.Child.ChildCreated,
+															 "someid", GridSortDirection.Descending, null,
+															 null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingChildDateTimeAscending()
-        {
-            _grid.Columns.Add(x => x.Child.ChildCreated).Sortable(true);
-            if (
-                !ValidateSorting<DateTime, object>(_grid, x => x.Child.ChildCreated,
-                                                             "Child.ChildCreated", GridSortDirection.Ascending, null,
-                                                             null))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingChildDateTimeAscending()
+		{
+			_grid.Columns.Add(x => x.Child.ChildCreated).Sortable(true);
+			if (
+				!ValidateSorting<DateTime, object>(_grid, x => x.Child.ChildCreated,
+															 "Child.ChildCreated", GridSortDirection.Ascending, null,
+															 null))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingThenByAscending()
-        {
-            _grid.Columns.Add(x => x.Child.ChildCreated).Sortable(true).ThenSortBy(x => x.Title);
-            if (
-                !ValidateSorting(_grid, x => x.Child.ChildCreated,"Child.ChildCreated",
-                                 GridSortDirection.Ascending, x => x.Title, GridSortDirection.Ascending))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingThenByAscending()
+		{
+			_grid.Columns.Add(x => x.Child.ChildCreated).Sortable(true).ThenSortBy(x => x.Title);
+			if (
+				!ValidateSorting(_grid, x => x.Child.ChildCreated, "Child.ChildCreated",
+								 GridSortDirection.Ascending, x => x.Title, GridSortDirection.Ascending))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        [TestMethod]
-        public void TestSortingThenByDescending()
-        {
-            _grid.Columns.Add(x => x.Child.ChildCreated).Sortable(true).ThenSortByDescending(x => x.Title);
-            if (
-                !ValidateSorting(_grid, x => x.Child.ChildCreated, "Child.ChildCreated",
-                                 GridSortDirection.Ascending, x => x.Title, GridSortDirection.Descending))
-            {
-                Assert.Fail("Sort works incorrect");
-            }
-        }
+		[Test]
+		public void TestSortingThenByDescending()
+		{
+			_grid.Columns.Add(x => x.Child.ChildCreated).Sortable(true).ThenSortByDescending(x => x.Title);
+			if (
+				!ValidateSorting(_grid, x => x.Child.ChildCreated, "Child.ChildCreated",
+								 GridSortDirection.Ascending, x => x.Title, GridSortDirection.Descending))
+			{
+				Assert.Fail("Sort works incorrect");
+			}
+		}
 
-        private bool ValidateSorting<T, TNext>(TestGrid grid, Func<TestModel, T> orderExpression,
-                                                        string columnName,
-                                                        GridSortDirection direction,
-                                                        Func<TestModel, TNext> thenByExpression,
-                                                        GridSortDirection? thenByDirection)
-        {
-            var settingsMock = new Mock<IGridSettingsProvider>();
-            settingsMock.Setup(s => s.SortSettings.ColumnName).Returns(columnName);
-            settingsMock.Setup(s => s.SortSettings.Direction).Returns(direction);
-            settingsMock.Setup(s => s.FilterSettings).Returns(new QueryStringFilterSettings());
-            grid.Settings = settingsMock.Object;
+		private bool ValidateSorting<T, TNext>(TestGrid grid, Func<TestModel, T> orderExpression,
+														string columnName,
+														GridSortDirection direction,
+														Func<TestModel, TNext> thenByExpression,
+														GridSortDirection? thenByDirection)
+		{
+			var settingsMock = new Mock<IGridSettingsProvider>();
+			settingsMock.Setup(s => s.SortSettings.ColumnName).Returns(columnName);
+			settingsMock.Setup(s => s.SortSettings.Direction).Returns(direction);
+			settingsMock.Setup(s => s.FilterSettings).Returns(new QueryStringFilterSettings());
+			grid.Settings = settingsMock.Object;
 
-            IEnumerable<TestModel> resultCollection = _grid.GetItemsToDisplay();
-            IOrderedEnumerable<TestModel> etalonCollection;
-            switch (direction)
-            {
-                case GridSortDirection.Ascending:
-                    etalonCollection = _repo.GetAll().OrderBy(orderExpression);
-                    break;
-                case GridSortDirection.Descending:
-                    etalonCollection = _repo.GetAll().OrderByDescending(orderExpression);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException("direction");
-            }
-            if (thenByExpression != null)
-            {
-                switch (thenByDirection)
-                {
-                    case GridSortDirection.Ascending:
-                        etalonCollection = etalonCollection.ThenBy(thenByExpression);
-                        break;
-                    case GridSortDirection.Descending:
-                        etalonCollection = etalonCollection.ThenByDescending(thenByExpression);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException("thenByDirection");
-                }
-            }
+			IEnumerable<TestModel> resultCollection = _grid.GetItemsToDisplay();
+			IOrderedEnumerable<TestModel> etalonCollection;
+			switch (direction)
+			{
+				case GridSortDirection.Ascending:
+					etalonCollection = _repo.GetAll().OrderBy(orderExpression);
+					break;
+				case GridSortDirection.Descending:
+					etalonCollection = _repo.GetAll().OrderByDescending(orderExpression);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("direction");
+			}
+			if (thenByExpression != null)
+			{
+				switch (thenByDirection)
+				{
+					case GridSortDirection.Ascending:
+						etalonCollection = etalonCollection.ThenBy(thenByExpression);
+						break;
+					case GridSortDirection.Descending:
+						etalonCollection = etalonCollection.ThenByDescending(thenByExpression);
+						break;
+					default:
+						throw new ArgumentOutOfRangeException("thenByDirection");
+				}
+			}
 
-            if (!ValidateCollectionsTheSame(resultCollection, etalonCollection))
-            {
-                return false;
-            }
-            return true;
-        }
+			if (!ValidateCollectionsTheSame(resultCollection, etalonCollection))
+			{
+				return false;
+			}
+			return true;
+		}
 
-        private bool ValidateCollectionsTheSame<T>(IEnumerable<T> collection1, IEnumerable<T> collection2)
-        {
-            for (int i = 0; i < collection1.Count(); i++)
-            {
-                if (!collection1.ElementAt(i).Equals(collection2.ElementAt(i)))
-                    return false;
-            }
-            return true;
-        }
-    }
+		private bool ValidateCollectionsTheSame<T>(IEnumerable<T> collection1, IEnumerable<T> collection2)
+		{
+			for (int i = 0; i < collection1.Count(); i++)
+			{
+				if (!collection1.ElementAt(i).Equals(collection2.ElementAt(i)))
+					return false;
+			}
+			return true;
+		}
+	}
 }

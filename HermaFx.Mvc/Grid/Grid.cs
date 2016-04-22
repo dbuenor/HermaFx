@@ -16,7 +16,7 @@ namespace HermaFx.Mvc.Grid
     /// </summary>
     public class Grid<T> : GridBase<T>, IGrid where T : class
     {
-        private readonly IGridAnnotaionsProvider _annotaions;
+        private readonly IGridAnnotationsProvider _annotaions;
         private readonly IColumnBuilder<T> _columnBuilder;
         private readonly GridColumnCollection<T> _columnsCollection;
         private readonly FilterGridItemsProcessor<T> _currentFilterItemsProcessor;
@@ -50,7 +50,7 @@ namespace HermaFx.Mvc.Grid
             AddItemsPreProcessor(_currentFilterItemsProcessor);
             InsertItemsProcessor(0, _currentSortItemsProcessor);
 
-            _annotaions = new GridAnnotaionsProvider();
+            _annotaions = new GridAnnotationsProvider();
 
             #endregion
 
