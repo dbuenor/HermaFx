@@ -11,7 +11,7 @@ namespace HermaFx.Mvc.Grid.Utility
 	/// <summary>
 	///     Helper class for reflection operations
 	/// </summary>
-	public static class PropertiesHelper
+	internal static class PropertiesHelper
 	{
 		private const string PropertiesQueryStringDelimeter = ".";
 

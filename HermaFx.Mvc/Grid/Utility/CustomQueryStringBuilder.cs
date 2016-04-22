@@ -10,7 +10,7 @@ namespace HermaFx.Mvc.Grid.Utility
 	/// <summary>
 	///     Class retain the current query string parameters
 	/// </summary>
-	public class CustomQueryStringBuilder : NameValueCollection
+	internal class CustomQueryStringBuilder : NameValueCollection
 	{
 		public CustomQueryStringBuilder(NameValueCollection collection)
 			: base(collection)

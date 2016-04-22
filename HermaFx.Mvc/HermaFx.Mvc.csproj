@@ -80,7 +80,7 @@
     <Compile Include="Grid\Columns\IColumnBuilder.cs" />
     <Compile Include="Grid\Columns\IGridColumn.cs" />
     <Compile Include="Grid\Columns\IGridColumnCollection.cs" />
-    <Compile Include="Grid\DataAnnotations\GridAnnotaionsProvider.cs" />
+    <Compile Include="Grid\DataAnnotations\GridAnnotationsProvider.cs" />
     <Compile Include="Grid\DataAnnotations\GridColumnAttribute.cs" />
     <Compile Include="Grid\DataAnnotations\GridHiddenColumnAttribute.cs" />
     <Compile Include="Grid\DataAnnotations\GridTableAttribute.cs" />

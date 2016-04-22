@@ -73,7 +73,7 @@ namespace HermaFx.Mvc.Grid.Pagination
 					_currentPage = PageCount;
 				return _currentPage;
 			}
-			set
+			protected internal set
 			{
 				_currentPage = value;
 				if (_currentPage > PageCount)

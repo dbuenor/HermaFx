@@ -9,7 +9,7 @@ namespace HermaFx.Mvc.Grid.Filtering
 	/// <summary>
 	///     Default Grid.Mvc filter. Provides logic for filtering items collection.
 	/// </summary>
-	public class DefaultColumnFilter<T, TData> : IColumnFilter<T>
+	internal class DefaultColumnFilter<T, TData> : IColumnFilter<T>
 	{
 		private readonly Expression<Func<T, TData>> _expression;
 		private readonly FilterTypeResolver _typeResolver = new FilterTypeResolver();

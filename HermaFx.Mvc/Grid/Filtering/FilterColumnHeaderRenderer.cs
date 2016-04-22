@@ -12,7 +12,7 @@ namespace HermaFx.Mvc.Grid.Filtering
 	/// <summary>
 	///     Renderer for sortable column
 	/// </summary>
-	public class QueryStringFilterColumnHeaderRenderer : IGridColumnHeaderRenderer
+	internal class QueryStringFilterColumnHeaderRenderer : IGridColumnHeaderRenderer
 	{
 		private const string FilteredButtonCssClass = "filtered";
 		private const string FilterButtonCss = "grid-filter-btn";

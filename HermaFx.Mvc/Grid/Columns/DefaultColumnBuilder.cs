@@ -9,7 +9,7 @@ namespace HermaFx.Mvc.Grid.Columns
 	/// <summary>
 	///     Default grid columns builder. Creates the columns from expression
 	/// </summary>
-	public class DefaultColumnBuilder<T> : IColumnBuilder<T> where T : class
+	internal class DefaultColumnBuilder<T> : IColumnBuilder<T> where T : class
 	{
 		private readonly IGridAnnotationsProvider _annotaions;
 		private readonly Grid<T> _grid;

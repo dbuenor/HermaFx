@@ -11,7 +11,7 @@ namespace HermaFx.Mvc.Grid.Sorting
 	///     Renderer for sortable column.
 	///     Object renders column name as link
 	/// </summary>
-	public class QueryStringSortColumnHeaderRenderer : IGridColumnHeaderRenderer
+	internal class QueryStringSortColumnHeaderRenderer : IGridColumnHeaderRenderer
 	{
 		private readonly QueryStringSortSettings _settings;
 

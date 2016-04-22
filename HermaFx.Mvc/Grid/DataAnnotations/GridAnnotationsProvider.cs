@@ -2,10 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 
 using HermaFx.Mvc.Grid.Utility;
+using System.Runtime.CompilerServices;
 
 namespace HermaFx.Mvc.Grid.DataAnnotations
 {
-	public class GridAnnotationsProvider : IGridAnnotationsProvider
+	internal class GridAnnotationsProvider : IGridAnnotationsProvider
 	{
 		public GridColumnAttribute GetAnnotationForColumn<T>(PropertyInfo pi)
 		{
