@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace HermaFx.Mvc.Grid
 {
-    public class TestGrid : Grid<TestModel>
-    {
-        public TestGrid(IEnumerable<TestModel> items)
-            : base(items)
-        {
-        }
-    }
+	public class TestGrid : Grid<TestModel>
+	{
+		public TestGrid(IEnumerable<TestModel> items)
+			: base(items)
+		{
+		}
+	}
 }

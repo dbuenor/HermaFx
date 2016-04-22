@@ -11,57 +11,57 @@ using HermaFx.Mvc.Grid.DataAnnotations.Models;
 namespace HermaFx.Mvc.Grid.DataAnnotations
 {
 
-    [TestFixture]
-    public class GridDataAnnotationTests
-    {
-        private Grid<TestGridAnnotationModel> _grid;
-        [OneTimeSetUp]
-        public void Init()
-        {
-            HttpContext.Current = new HttpContext(
-                new HttpRequest("", "http://tempuri.org", ""),
-                new HttpResponse(new StringWriter()));
-            _grid = new Grid<TestGridAnnotationModel>(Enumerable.Empty<TestGridAnnotationModel>().AsQueryable());
-        }
+	[TestFixture]
+	public class GridDataAnnotationTests
+	{
+		private Grid<TestGridAnnotationModel> _grid;
+		[OneTimeSetUp]
+		public void Init()
+		{
+			HttpContext.Current = new HttpContext(
+				new HttpRequest("", "http://tempuri.org", ""),
+				new HttpResponse(new StringWriter()));
+			_grid = new Grid<TestGridAnnotationModel>(Enumerable.Empty<TestGridAnnotationModel>().AsQueryable());
+		}
 
-        [Test]
-        public void TestPaging()
-        {
-            Assert.AreEqual(_grid.EnablePaging, true);
-            Assert.AreEqual(_grid.Pager.PageSize, 20);
-        }
+		[Test]
+		public void TestPaging()
+		{
+			Assert.AreEqual(_grid.EnablePaging, true);
+			Assert.AreEqual(_grid.Pager.PageSize, 20);
+		}
 
-        [Test]
-        public void TestColumnsDataAnnotation()
-        {
-            _grid.AutoGenerateColumns();
-            int i = 0;
-            foreach (var pi in typeof(TestGridAnnotationModel).GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
-                if (pi.GetAttribute<NotMappedColumnAttribute>() != null)
-                    continue;
+		[Test]
+		public void TestColumnsDataAnnotation()
+		{
+			_grid.AutoGenerateColumns();
+			int i = 0;
+			foreach (var pi in typeof(TestGridAnnotationModel).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+			{
+				if (pi.GetAttribute<NotMappedColumnAttribute>() != null)
+					continue;
 
-                var gridOpt = pi.GetAttribute<GridColumnAttribute>();
+				var gridOpt = pi.GetAttribute<GridColumnAttribute>();
 
-                if (gridOpt != null)
-                {
-                    var column = _grid.Columns.ElementAt(i) as IGridColumn<TestGridAnnotationModel>;
-                    if (column == null)
-                        Assert.Fail();
+				if (gridOpt != null)
+				{
+					var column = _grid.Columns.ElementAt(i) as IGridColumn<TestGridAnnotationModel>;
+					if (column == null)
+						Assert.Fail();
 
-                    Assert.AreEqual(column.EncodeEnabled, gridOpt.EncodeEnabled);
-                    Assert.AreEqual(column.FilterEnabled, gridOpt.FilterEnabled);
-                    Assert.AreEqual(column.SanitizeEnabled, gridOpt.SanitizeEnabled);
+					Assert.AreEqual(column.EncodeEnabled, gridOpt.EncodeEnabled);
+					Assert.AreEqual(column.FilterEnabled, gridOpt.FilterEnabled);
+					Assert.AreEqual(column.SanitizeEnabled, gridOpt.SanitizeEnabled);
 
-                    if (!string.IsNullOrEmpty(gridOpt.Title))
-                        Assert.AreEqual(column.Title, gridOpt.Title);
+					if (!string.IsNullOrEmpty(gridOpt.Title))
+						Assert.AreEqual(column.Title, gridOpt.Title);
 
-                    if (!string.IsNullOrEmpty(gridOpt.Width))
-                        Assert.AreEqual(column.Width, gridOpt.Width);
-                }
-                i++;
-            }
-            Assert.AreEqual(_grid.Columns.Count(), 3);
-        }
-    }
+					if (!string.IsNullOrEmpty(gridOpt.Width))
+						Assert.AreEqual(column.Width, gridOpt.Width);
+				}
+				i++;
+			}
+			Assert.AreEqual(_grid.Columns.Count(), 3);
+		}
+	}
 }
