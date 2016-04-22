@@ -194,7 +194,7 @@ namespace HermaFx.Mvc.Grid
         /// <summary>
         ///     Methods returns items that will need to be displayed
         /// </summary>
-        protected internal virtual IEnumerable<T> GetItemsToDisplay()
+        public virtual IEnumerable<T> GetItemsToDisplay()
         {
             PrepareItemsToDisplay();
             return AfterItems;
