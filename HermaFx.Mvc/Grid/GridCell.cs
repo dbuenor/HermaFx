@@ -2,34 +2,34 @@
 
 namespace HermaFx.Mvc.Grid
 {
-    public class GridCell : IGridCell
-    {
-        private readonly string _value;
+	public class GridCell : IGridCell
+	{
+		private readonly string _value;
 
-        public GridCell(string value)
-        {
-            _value = value;
-        }
+		public GridCell(string value)
+		{
+			_value = value;
+		}
 
-        public bool Encode { get; set; }
+		public bool Encode { get; set; }
 
-        #region IGridCell Members
+		#region IGridCell Members
 
-        public string Value
-        {
-            get
-            {
-                return Encode && !string.IsNullOrEmpty(_value)
-                           ? HttpUtility.HtmlEncode(_value)
-                           : _value;
-            }
-        }
+		public string Value
+		{
+			get
+			{
+				return Encode && !string.IsNullOrEmpty(_value)
+						   ? HttpUtility.HtmlEncode(_value)
+						   : _value;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        public override string ToString()
-        {
-            return Value;
-        }
-    }
+		public override string ToString()
+		{
+			return Value;
+		}
+	}
 }

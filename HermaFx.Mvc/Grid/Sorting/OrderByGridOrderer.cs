@@ -4,38 +4,38 @@ using System.Linq.Expressions;
 
 namespace HermaFx.Mvc.Grid.Sorting
 {
-    /// <summary>
-    ///     Object applies order (OrderBy, OrderByDescending) for items collection
-    /// </summary>
-    internal class OrderByGridOrderer<T, TKey> : IColumnOrderer<T>
-    {
-        private readonly Expression<Func<T, TKey>> _expression;
+	/// <summary>
+	///     Object applies order (OrderBy, OrderByDescending) for items collection
+	/// </summary>
+	internal class OrderByGridOrderer<T, TKey> : IColumnOrderer<T>
+	{
+		private readonly Expression<Func<T, TKey>> _expression;
 
-        public OrderByGridOrderer(Expression<Func<T, TKey>> expression)
-        {
-            _expression = expression;
-        }
+		public OrderByGridOrderer(Expression<Func<T, TKey>> expression)
+		{
+			_expression = expression;
+		}
 
-        #region IColumnOrderer<T> Members
+		#region IColumnOrderer<T> Members
 
-        public IQueryable<T> ApplyOrder(IQueryable<T> items)
-        {
-            return ApplyOrder(items, GridSortDirection.Ascending);
-        }
+		public IQueryable<T> ApplyOrder(IQueryable<T> items)
+		{
+			return ApplyOrder(items, GridSortDirection.Ascending);
+		}
 
-        public IQueryable<T> ApplyOrder(IQueryable<T> items, GridSortDirection direction)
-        {
-            switch (direction)
-            {
-                case GridSortDirection.Ascending:
-                    return items.OrderBy(_expression);
-                case GridSortDirection.Descending:
-                    return items.OrderByDescending(_expression);
-                default:
-                    throw new ArgumentOutOfRangeException("direction");
-            }
-        }
+		public IQueryable<T> ApplyOrder(IQueryable<T> items, GridSortDirection direction)
+		{
+			switch (direction)
+			{
+				case GridSortDirection.Ascending:
+					return items.OrderBy(_expression);
+				case GridSortDirection.Descending:
+					return items.OrderByDescending(_expression);
+				default:
+					throw new ArgumentOutOfRangeException("direction");
+			}
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -4,30 +4,30 @@ using HermaFx.Mvc.Grid.Columns;
 
 namespace HermaFx.Mvc.Grid
 {
-    public class GridCellRenderer : GridStyledRenderer, IGridCellRenderer
-    {
-        private const string TdClass = "grid-cell";
+	public class GridCellRenderer : GridStyledRenderer, IGridCellRenderer
+	{
+		private const string TdClass = "grid-cell";
 
-        public GridCellRenderer()
-        {
-            AddCssClass(TdClass);
-        }
+		public GridCellRenderer()
+		{
+			AddCssClass(TdClass);
+		}
 
-        public IHtmlString Render(IGridColumn column, IGridCell cell)
-        {
-            string cssStyles = GetCssStylesString();
-            string cssClass = GetCssClassesString();
+		public IHtmlString Render(IGridColumn column, IGridCell cell)
+		{
+			string cssStyles = GetCssStylesString();
+			string cssClass = GetCssClassesString();
 
-            var builder = new TagBuilder("td");
-            if (!string.IsNullOrWhiteSpace(cssClass))
-                builder.AddCssClass(cssClass);
-            if (!string.IsNullOrWhiteSpace(cssStyles))
-                builder.MergeAttribute("style", cssStyles);
-            builder.MergeAttribute("data-name", column.Name);
+			var builder = new TagBuilder("td");
+			if (!string.IsNullOrWhiteSpace(cssClass))
+				builder.AddCssClass(cssClass);
+			if (!string.IsNullOrWhiteSpace(cssStyles))
+				builder.MergeAttribute("style", cssStyles);
+			builder.MergeAttribute("data-name", column.Name);
 
-            builder.InnerHtml = cell.ToString();
+			builder.InnerHtml = cell.ToString();
 
-            return MvcHtmlString.Create(builder.ToString());
-        }
-    }
+			return MvcHtmlString.Create(builder.ToString());
+		}
+	}
 }

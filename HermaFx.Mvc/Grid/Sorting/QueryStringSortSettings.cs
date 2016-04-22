@@ -3,82 +3,82 @@ using System.Web;
 
 namespace HermaFx.Mvc.Grid.Sorting
 {
-    /// <summary>
-    ///     Grid sort settings takes from query string
-    /// </summary>
-    public class QueryStringSortSettings : IGridSortSettings
-    {
-        public const string DefaultDirectionQueryParameter = "grid-dir";
-        public const string DefaultColumnQueryParameter = "grid-column";
-        public readonly HttpContext Context;
-        private string _columnQueryParameterName;
-        private string _directionQueryParameterName;
+	/// <summary>
+	///     Grid sort settings takes from query string
+	/// </summary>
+	public class QueryStringSortSettings : IGridSortSettings
+	{
+		public const string DefaultDirectionQueryParameter = "grid-dir";
+		public const string DefaultColumnQueryParameter = "grid-column";
+		public readonly HttpContext Context;
+		private string _columnQueryParameterName;
+		private string _directionQueryParameterName;
 
-        public QueryStringSortSettings()
-            : this(HttpContext.Current)
-        {
-        }
+		public QueryStringSortSettings()
+			: this(HttpContext.Current)
+		{
+		}
 
-        public QueryStringSortSettings(HttpContext context)
-        {
-            if (context == null)
-                throw new ArgumentException("No http context here!");
-            Context = context;
-            ColumnQueryParameterName = DefaultColumnQueryParameter;
-            DirectionQueryParameterName = DefaultDirectionQueryParameter;
-        }
+		public QueryStringSortSettings(HttpContext context)
+		{
+			if (context == null)
+				throw new ArgumentException("No http context here!");
+			Context = context;
+			ColumnQueryParameterName = DefaultColumnQueryParameter;
+			DirectionQueryParameterName = DefaultDirectionQueryParameter;
+		}
 
-        public string ColumnQueryParameterName
-        {
-            get { return _columnQueryParameterName; }
-            set
-            {
-                _columnQueryParameterName = value;
-                RefreshColumn();
-            }
-        }
+		public string ColumnQueryParameterName
+		{
+			get { return _columnQueryParameterName; }
+			set
+			{
+				_columnQueryParameterName = value;
+				RefreshColumn();
+			}
+		}
 
-        public string DirectionQueryParameterName
-        {
-            get { return _directionQueryParameterName; }
-            set
-            {
-                _directionQueryParameterName = value;
-                RefreshDirection();
-            }
-        }
+		public string DirectionQueryParameterName
+		{
+			get { return _directionQueryParameterName; }
+			set
+			{
+				_directionQueryParameterName = value;
+				RefreshDirection();
+			}
+		}
 
-        #region IGridSortSettings Members
+		#region IGridSortSettings Members
 
-        public string ColumnName { get; set; }
-        public GridSortDirection Direction { get; set; }
+		public string ColumnName { get; set; }
+		public GridSortDirection Direction { get; set; }
 
-        #endregion
+		#endregion
 
-        private void RefreshColumn()
-        {
-            //Columns
-            string currentSortColumn = Context.Request.QueryString[ColumnQueryParameterName] ?? string.Empty;
-            ColumnName = currentSortColumn;
-            if (string.IsNullOrEmpty(currentSortColumn))
-            {
-                Direction = GridSortDirection.Ascending;
-            }
-        }
+		private void RefreshColumn()
+		{
+			//Columns
+			string currentSortColumn = Context.Request.QueryString[ColumnQueryParameterName] ?? string.Empty;
+			ColumnName = currentSortColumn;
+			if (string.IsNullOrEmpty(currentSortColumn))
+			{
+				Direction = GridSortDirection.Ascending;
+			}
+		}
 
-        private void RefreshDirection()
-        {
-            //Direction
-            string currentDirection = Context.Request.QueryString[DirectionQueryParameterName] ??
-                                      string.Empty;
-            if (string.IsNullOrEmpty(currentDirection))
-            {
-                Direction = GridSortDirection.Ascending;
-                return;
-            }
-            GridSortDirection dir;
-            Enum.TryParse(currentDirection, true, out dir);
-            Direction = dir;
-        }
-    }
+		private void RefreshDirection()
+		{
+			//Direction
+			string currentDirection = Context.Request.QueryString[DirectionQueryParameterName] ??
+									  string.Empty;
+			if (string.IsNullOrEmpty(currentDirection))
+			{
+				Direction = GridSortDirection.Ascending;
+				return;
+			}
+			GridSortDirection dir;
+			Enum.TryParse(currentDirection, true, out dir);
+			Direction = dir;
+		}
+	}
 }
