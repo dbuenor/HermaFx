@@ -23,15 +23,15 @@
 			self.currentPage++;
 
 			$.get("/Home/GetOrdersGridRows" + self.pad(location.search) + self.currentPage)
-                .done(function (response) {
+				.done(function (response) {
 
-                	gridTableBody.append(response.Html);
-                	if (!response.HasItems)
-                		pageLink.hide();
-                })
-                .fail(function () {
-                	alert("cannot load items");
-                });
+					gridTableBody.append(response.Html);
+					if (!response.HasItems)
+						pageLink.hide();
+				})
+				.fail(function () {
+					alert("cannot load items");
+				});
 		};
 
 		this.pad = function (query) {

@@ -11,20 +11,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HermaFx.Mvc.Site.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Shipper
-    {
-        public Shipper()
-        {
-            this.Orders = new HashSet<Order>();
-        }
-        [Key]
-        public int ShipperID { get; set; }
-        public string CompanyName { get; set; }
-        public string Phone { get; set; }
-    
-        public virtual ICollection<Order> Orders { get; set; }
-    }
+	using System;
+	using System.Collections.Generic;
+	
+	public partial class Shipper
+	{
+		public Shipper()
+		{
+			this.Orders = new HashSet<Order>();
+		}
+		[Key]
+		public int ShipperID { get; set; }
+		public string CompanyName { get; set; }
+		public string Phone { get; set; }
+	
+		public virtual ICollection<Order> Orders { get; set; }
+	}
 }

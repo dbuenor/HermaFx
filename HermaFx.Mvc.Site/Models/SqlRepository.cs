@@ -3,24 +3,24 @@ using System.Linq;
 
 namespace HermaFx.Mvc.Site.Models
 {
-    public abstract class SqlRepository<T> : IRepository<T> where T : class
-    {
-        protected readonly DbSet<T> EfDbSet;
+	public abstract class SqlRepository<T> : IRepository<T> where T : class
+	{
+		protected readonly DbSet<T> EfDbSet;
 
-        protected SqlRepository(DbContext context)
-        {
-            EfDbSet = context.Set<T>();
-        }
+		protected SqlRepository(DbContext context)
+		{
+			EfDbSet = context.Set<T>();
+		}
 
-        #region IRepository<T> Members
+		#region IRepository<T> Members
 
-        public virtual IOrderedQueryable<T> GetAll()
-        {
-            return EfDbSet;
-        }
+		public virtual IOrderedQueryable<T> GetAll()
+		{
+			return EfDbSet;
+		}
 
-        public abstract T GetById(object id);
+		public abstract T GetById(object id);
 
-        #endregion
-    }
+		#endregion
+	}
 }
