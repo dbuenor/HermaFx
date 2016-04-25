@@ -150,6 +150,7 @@
     </Compile>
     <Compile Include="Models\CheckboxColumnRenderer.cs" />
     <Compile Include="Models\CustomersRepository.cs" />
+    <Compile Include="Models\Database.cs" />
     <Compile Include="Models\Domain\Category.cs" />
     <Compile Include="Models\Domain\Customer.cs" />
     <Compile Include="Models\Domain\Employee.cs" />
@@ -214,6 +215,8 @@
     <Content Include="Grid.mvc.readme" />
     <Content Include="Content\bootstrap\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap\bootstrap.css.map" />
+    <Content Include="Content\Json\Orders.json" />
+    <Content Include="Content\Json\OrdersWithDetails.json" />
     <None Include="Properties\PublishProfiles\gridmvc - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\gridmvc - Web Deploy %283%29.pubxml" />
     <Content Include="Scripts\gridmvc.lang.fr.js" />

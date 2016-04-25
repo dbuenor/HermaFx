@@ -4,7 +4,7 @@
 @model HermaFx.Mvc.Site.Models.Grids.OrdersGrid
 @helper CustomRenderingOfColumn(Order order)
 {
-	if (order.Customer.IsVip)
+	if (order.Customer != null && order.Customer.IsVip)
 	{
 		<text>Yes</text>
 	}
@@ -38,7 +38,7 @@
 			.SetWidth(110);
 	//.SetFilterWidgetType(string.Empty, new { format = "dd.mm.yyyy" })
 	/* Adding "CompanyName" column: */
-	columns.Add(o => o.Customer.CompanyName)
+	columns.Add(o => o.CustomerID)
 		   .Titled("Company")
 		   .SetWidth(250)
 		   .ThenSortByDescending(o => o.OrderID)
@@ -50,5 +50,5 @@
 			.Css("hidden-xs") //hide on phones
 			.RenderValueAs(o => CustomRenderingOfColumn(o));
 
-}).SetRowCssClasses(item => item.Customer.IsVip ? "success" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+}).SetRowCssClasses(item => item.Customer != null && item.Customer.IsVip ? "success" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
 

@@ -26,7 +26,7 @@
 				.Format("{0:dd/MM/yyyy}")
 				.SetWidth(110);
 		/* Adding "CompanyName" column: */
-		columns.Add(o => o.Customer.CompanyName)
+		columns.Add(o => o.CustomerID)
 				.Titled("Company Name")
 				.ThenSortByDescending(o => o.OrderID)
 				.SetFilterWidgetType("CustomCompanyNameFilterWidget");
@@ -35,6 +35,6 @@
 				.Titled("Vip customer")
 				.SetWidth(150)
 				.RenderValueAs(o => CustomRenderingOfColumn(o));
-	}).SetRowCssClasses(item => item.Customer.IsVip ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+	}).SetRowCssClasses(item => item.Customer != null && item.Customer.IsVip ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
 	</pre>
 </div>
