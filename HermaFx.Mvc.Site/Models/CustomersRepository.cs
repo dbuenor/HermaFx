@@ -2,19 +2,14 @@
 
 namespace HermaFx.Mvc.Site.Models
 {
-	public class CustomersRepository : SqlRepository<Customer>
+	public class CustomersRepository
 	{
-		public CustomersRepository()
-			: base(new NorthwindDbContext())
+		public IOrderedQueryable<Customer> GetAll()
 		{
+			return Database.GetCustomers().OrderBy(o => o.CompanyName);
 		}
 
-		public override IOrderedQueryable<Customer> GetAll()
-		{
-			return base.GetAll().OrderBy(o => o.CompanyName);
-		}
-
-		public override Customer GetById(object id)
+		public Customer GetById(object id)
 		{
 			return GetAll().FirstOrDefault(c => c.CustomerID == (string)id);
 		}
