@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Facilities\System.Linq\IQueryableExtensions.cs" />
+    <Compile Include="App_Logic\Grid\GetRowsFilteredCommand.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

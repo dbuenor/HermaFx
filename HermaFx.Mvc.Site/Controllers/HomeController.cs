@@ -39,19 +39,21 @@ namespace HermaFx.Mvc.Site.Controllers
 		public ActionResult TestGrid()
 		{
 			var repository = new OrdersRepository();
-			var allRows = repository.GetAll().ToList();
+			var allRows = repository.GetAll();
 			var currentPage = Int32.Parse(Request.QueryString["grid-page"] ?? "1");
+			/// FIXME: We need to "translate" from column title to his real column name. Now we obtain as a parameter his Column Title instead of Id/Name.
 			var columnSort = Request.QueryString["grid-column"];
-			var alreadyPaged = repository.GetAll().Skip(15 * (currentPage - 1));
 
-			//SORTING
-			if (!string.IsNullOrEmpty(columnSort))
-				alreadyPaged = alreadyPaged.OrderBy(columnSort);
+			var result = GetRowsFilteredCommand.Execute(new GetRowsFiltered<Order>()
+			{
+				ColumnSort = columnSort,
+				CurrentPage = currentPage,
+				Rows = allRows,
+				RowsPerPage = 15
+			});
 
-			//PAGING
-			alreadyPaged = alreadyPaged.Take(15);
+			var grid = new OrdersGridTest(result, currentPage, result.Count);
 
-			var grid = new OrdersGridTest(alreadyPaged.ToList(), currentPage, allRows.Count);
 			return PartialView("_OrdersGridTest", grid);
 		}
 		#endregion
