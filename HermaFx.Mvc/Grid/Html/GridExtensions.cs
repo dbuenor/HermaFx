@@ -50,6 +50,22 @@ namespace HermaFx.Mvc.Grid.Html
 			return htmlGrid;
 		}
 
+		public static HtmlGridSimple<T> GridSimple<T>(this HtmlHelper helper, GridSimple<T> sourceGrid)
+			where T : class
+		{
+			//wrap source grid:
+			var htmlGrid = new HtmlGridSimple<T>(sourceGrid, helper.ViewContext, DefaultPartialViewName);
+			return htmlGrid;
+		}
+
+		public static HtmlGridSimple<T> GridSimple<T>(this HtmlHelper helper, GridSimple<T> sourceGrid, string viewName)
+			where T : class
+		{
+			//wrap source grid:
+			var htmlGrid = new HtmlGridSimple<T>(sourceGrid, helper.ViewContext, viewName);
+			return htmlGrid;
+		}
+
 		//support IHtmlString in RenderValueAs method
 		public static IGridColumn<T> RenderValueAs<T>(this IGridColumn<T> column, Func<T, IHtmlString> constraint)
 		{

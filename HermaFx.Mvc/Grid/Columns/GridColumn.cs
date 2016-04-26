@@ -25,7 +25,7 @@ namespace HermaFx.Mvc.Grid.Columns
 		/// <summary>
 		///     Parent grid of this column
 		/// </summary>
-		private readonly Grid<T> _grid;
+		private readonly IGrid<T> _grid;
 
 		private readonly List<IColumnOrderer<T>> _orderers = new List<IColumnOrderer<T>>();
 
@@ -35,7 +35,7 @@ namespace HermaFx.Mvc.Grid.Columns
 		private IGridColumnHeaderRenderer _headerRenderer;
 
 
-		public GridColumn(Expression<Func<T, TDataType>> expression, Grid<T> grid)
+		public GridColumn(Expression<Func<T, TDataType>> expression, IGrid<T> grid)
 		{
 			#region Setup defaults
 
@@ -104,7 +104,7 @@ namespace HermaFx.Mvc.Grid.Columns
 			get { return _filterWidgetTypeName; }
 		}
 
-		public override IGrid ParentGrid
+		public override IGridBase ParentGrid
 		{
 			get { return _grid; }
 		}

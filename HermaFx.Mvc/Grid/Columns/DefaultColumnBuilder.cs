@@ -12,9 +12,9 @@ namespace HermaFx.Mvc.Grid.Columns
 	internal class DefaultColumnBuilder<T> : IColumnBuilder<T> where T : class
 	{
 		private readonly IGridAnnotationsProvider _annotaions;
-		private readonly Grid<T> _grid;
+		private readonly IGrid<T> _grid;
 
-		public DefaultColumnBuilder(Grid<T> grid, IGridAnnotationsProvider annotaions)
+		public DefaultColumnBuilder(IGrid<T> grid, IGridAnnotationsProvider annotaions)
 		{
 			_grid = grid;
 			_annotaions = annotaions;

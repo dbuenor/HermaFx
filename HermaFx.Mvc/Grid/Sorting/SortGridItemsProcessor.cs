@@ -10,10 +10,10 @@ namespace HermaFx.Mvc.Grid.Sorting
 	/// <typeparam name="T"></typeparam>
 	internal class SortGridItemsProcessor<T> : IGridItemsProcessor<T> where T : class
 	{
-		private readonly IGrid _grid;
+		private readonly IGridBase _grid;
 		private IGridSortSettings _settings;
 
-		public SortGridItemsProcessor(IGrid grid, IGridSortSettings settings)
+		public SortGridItemsProcessor(IGridBase grid, IGridSortSettings settings)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");

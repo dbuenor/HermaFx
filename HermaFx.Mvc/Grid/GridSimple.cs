@@ -14,41 +14,38 @@ namespace HermaFx.Mvc.Grid
 	/// <summary>
 	///     Grid.Mvc base class
 	/// </summary>
-	public class Grid<T> : GridBase<T>, IGrid<T> where T : class
+	public class GridSimple<T> : GridSimpleBase<T>, IGrid<T> where T : class
 	{
 		private readonly IGridAnnotationsProvider _annotations;
 		private readonly IColumnBuilder<T> _columnBuilder;
 		private readonly GridColumnCollection<T> _columnsCollection;
-		private readonly FilterGridItemsProcessor<T> _currentFilterItemsProcessor;
-		private readonly SortGridItemsProcessor<T> _currentSortItemsProcessor;
 
 		private int _displayingItemsCount = -1; // count of displaying items (if using pagination)
 		private bool _enablePaging;
+		private int _rowCount = -1;
+		private int _pageNumber = -1;
 		private IGridPager _pager;
 
 		private IGridItemsProcessor<T> _pagerProcessor;
 		private IGridSettingsProvider _settings;
 
-		public Grid(IEnumerable<T> items)
-			: this(items.AsQueryable())
+		public GridSimple(IEnumerable<T> items, int pageNumber, int rowCount)
+			: this(items.AsQueryable(), pageNumber, rowCount)
 		{
 		}
 
-		public Grid(IQueryable<T> items)
+		public GridSimple(IQueryable<T> items, int pageNumber, int rowCount)
 			: base(items)
 		{
 			#region init default properties
 
 			//set up sort settings:
+			//_pageNumber = pageNumber;
+			_rowCount = rowCount;
 			_settings = new QueryStringGridSettingsProvider();
 			Sanitizer = new Sanitizer();
 			EmptyGridText = Strings.DefaultGridEmptyText;
 			Language = Strings.Lang;
-
-			_currentSortItemsProcessor = new SortGridItemsProcessor<T>(this, _settings.SortSettings);
-			_currentFilterItemsProcessor = new FilterGridItemsProcessor<T>(this, _settings.FilterSettings);
-			AddItemsPreProcessor(_currentFilterItemsProcessor);
-			InsertItemsProcessor(0, _currentSortItemsProcessor);
 
 			_annotations = new GridAnnotationsProvider();
 
@@ -99,8 +96,6 @@ namespace HermaFx.Mvc.Grid
 			set
 			{
 				_settings = value;
-				_currentSortItemsProcessor.UpdateSettings(_settings.SortSettings);
-				_currentFilterItemsProcessor.UpdateSettings(_settings.FilterSettings);
 			}
 		}
 
@@ -123,7 +118,7 @@ namespace HermaFx.Mvc.Grid
 			{
 				if (_displayingItemsCount >= 0)
 					return _displayingItemsCount;
-				_displayingItemsCount = GetItemsToDisplay().Count();
+				_displayingItemsCount = _rowCount != -1 ? _rowCount : GetItemsToDisplay().Count();
 				return _displayingItemsCount;
 			}
 		}
@@ -142,11 +137,6 @@ namespace HermaFx.Mvc.Grid
 				{
 					if (_pagerProcessor == null)
 						_pagerProcessor = new PagerGridItemsProcessor<T>(Pager);
-					AddItemsProcessor(_pagerProcessor);
-				}
-				else
-				{
-					RemoveItemsProcessor(_pagerProcessor);
 				}
 			}
 		}
@@ -163,7 +153,7 @@ namespace HermaFx.Mvc.Grid
 		/// </summary>
 		public IGridPager Pager
 		{
-			get { return _pager ?? (_pager = new GridPager()); }
+			get { return _pager ?? (_pager = new GridPager(_rowCount)); }
 			set { _pager = value; }
 		}
 
@@ -196,8 +186,7 @@ namespace HermaFx.Mvc.Grid
 		/// </summary>
 		protected internal virtual IEnumerable<T> GetItemsToDisplay()
 		{
-			PrepareItemsToDisplay();
-			return AfterItems;
+			return GridItems;
 		}
 
 		/// <summary>

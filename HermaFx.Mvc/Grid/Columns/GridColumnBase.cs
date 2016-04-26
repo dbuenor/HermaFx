@@ -79,7 +79,7 @@ namespace HermaFx.Mvc.Grid.Columns
 			return this;
 		}
 
-		public abstract IGrid ParentGrid { get; }
+		public abstract IGridBase ParentGrid { get; }
 
 		public virtual IGridColumn<T> Sanitized(bool sanitize)
 		{

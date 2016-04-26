@@ -17,9 +17,9 @@ namespace HermaFx.Mvc.Site.Models.Grids
 
 	public class AjaxGridPager : IGridPager
 	{
-		private readonly IGrid _grid;
+		private readonly IGridBase _grid;
 
-		public AjaxGridPager(IGrid grid)
+		public AjaxGridPager(IGridBase grid)
 		{
 			_grid = grid;
 		}

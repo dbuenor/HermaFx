@@ -12,7 +12,7 @@ namespace HermaFx.Mvc.Grid.Columns
 
 	public interface IGridColumn : ISortableColumn, IFilterableColumn
 	{
-		IGrid ParentGrid { get; }
+		IGridBase ParentGrid { get; }
 	}
 
 	/// <summary>

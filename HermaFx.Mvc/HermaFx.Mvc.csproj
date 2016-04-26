@@ -111,7 +111,9 @@
     <Compile Include="Grid\Filtering\Types\UInt16FilterType.cs" />
     <Compile Include="Grid\Filtering\Types\UInt32FilterType.cs" />
     <Compile Include="Grid\Filtering\Types\UInt64FilterType.cs" />
+    <Compile Include="Grid\GridSimple.cs" />
     <Compile Include="Grid\Grid.cs" />
+    <Compile Include="Grid\GridSimpleBase.cs" />
     <Compile Include="Grid\GridBase.cs" />
     <Compile Include="Grid\GridCell.cs" />
     <Compile Include="Grid\GridCellRenderer.cs" />
@@ -120,10 +122,13 @@
     <Compile Include="Grid\GridHiddenHeaderRenderer.cs" />
     <Compile Include="Grid\GridStyledRenderer.cs" />
     <Compile Include="Grid\Html\GridExtensions.cs" />
+    <Compile Include="Grid\Html\GridSimpleHtmlOptions.cs" />
     <Compile Include="Grid\Html\GridHtmlOptions.cs" />
     <Compile Include="Grid\Html\GridRenderOptions.cs" />
+    <Compile Include="Grid\Html\HtmlGridSimple.cs" />
     <Compile Include="Grid\Html\HtmlGrid.cs" />
     <Compile Include="Grid\Html\IGridHtmlOptions.cs" />
+    <Compile Include="Grid\IGridBase.cs" />
     <Compile Include="Grid\IGrid.cs" />
     <Compile Include="Grid\IGridCell.cs" />
     <Compile Include="Grid\IGridCellRenderer.cs" />

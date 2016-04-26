@@ -10,10 +10,10 @@ namespace HermaFx.Mvc.Grid.Filtering
 	/// </summary>
 	internal class FilterGridItemsProcessor<T> : IGridItemsProcessor<T> where T : class
 	{
-		private readonly IGrid _grid;
+		private readonly IGridBase _grid;
 		private IGridFilterSettings _settings;
 
-		public FilterGridItemsProcessor(IGrid grid, IGridFilterSettings settings)
+		public FilterGridItemsProcessor(IGridBase grid, IGridFilterSettings settings)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");

@@ -13,10 +13,10 @@ namespace HermaFx.Mvc.Grid.Columns
 	public class HiddenGridColumn<T, TDataType> : GridColumnBase<T>
 	{
 		private readonly Func<T, TDataType> _constraint;
-		private readonly IGrid _grid;
+		private readonly IGridBase _grid;
 		private IGridCellRenderer _cellRenderer;
 
-		public HiddenGridColumn(Expression<Func<T, TDataType>> expression, IGrid grid)
+		public HiddenGridColumn(Expression<Func<T, TDataType>> expression, IGridBase grid)
 		{
 			_grid = grid;
 			_cellRenderer = new GridHiddenCellRenderer();
@@ -72,7 +72,7 @@ namespace HermaFx.Mvc.Grid.Columns
 		//public override bool IsSorted { get; set; }
 		//public override GridSortDirection? Direction { get; set; }
 
-		public override IGrid ParentGrid
+		public override IGridBase ParentGrid
 		{
 			get { return _grid; }
 		}

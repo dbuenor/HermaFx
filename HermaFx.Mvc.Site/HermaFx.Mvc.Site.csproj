@@ -139,6 +139,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Facilities\System.Linq\IQueryableExtensions.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Models\Domain\Supplier.cs" />
     <Compile Include="Models\Domain\Territory.cs" />
     <Compile Include="Models\Grids\OrdersAjaxPagingGrid.cs" />
+    <Compile Include="Models\Grids\OrdersGridTest.cs" />
     <Compile Include="Models\Grids\OrdersGrid.cs" />
     <Compile Include="Models\OrdersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -285,6 +287,8 @@
     <Content Include="Views\Shared\_AjaxGridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Home\_OrdersGridTest.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

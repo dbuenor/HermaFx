@@ -8,12 +8,12 @@ namespace HermaFx.Mvc.Grid.Html
 	/// <summary>
 	///     Grid adapter for html helper
 	/// </summary>
-	public class HtmlGrid<T> : GridHtmlOptions<T>, IGridBase where T : class
+	public class HtmlGridSimple<T> : GridSimpleHtmlOptions<T>, IGridBase where T : class
 	{
-		private readonly Grid<T> _source;
+		private readonly GridSimple<T> _source;
 
 
-		public HtmlGrid(Grid<T> source, ViewContext viewContext, string viewName)
+		public HtmlGridSimple(GridSimple<T> source, ViewContext viewContext, string viewName)
 			: base(source, viewContext, viewName)
 		{
 			_source = source;

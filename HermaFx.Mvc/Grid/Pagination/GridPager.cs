@@ -32,7 +32,12 @@ namespace HermaFx.Mvc.Grid.Pagination
 		{
 		}
 
-		public GridPager(HttpContext context)
+		public GridPager(int rowCount)
+			: this(HttpContext.Current, rowCount)
+		{
+		}
+
+		public GridPager(HttpContext context, int? rowCount = null)
 		{
 			if (context == null)
 				throw new Exception("No http context here!");
@@ -45,6 +50,9 @@ namespace HermaFx.Mvc.Grid.Pagination
 			TemplateName = DefaultPagerViewName;
 			MaxDisplayedPages = MaxDisplayedPages;
 			PageSize = DefaultPageSize;
+
+			if (rowCount.HasValue)
+				ItemsCount = rowCount.Value;
 		}
 
 		#endregion

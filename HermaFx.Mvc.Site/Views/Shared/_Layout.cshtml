@@ -47,6 +47,7 @@
 			<div class="navbar-collapse navbar-ex5-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="@(ViewBag.ActiveMenuTitle == "Demo" ? "active" : string.Empty)">@Html.ActionLink("Demo", "Index", "Home")</li>
+					<li class="@(ViewBag.ActiveMenuTitle == "Test" ? "active" : string.Empty)">@Html.ActionLink("Test", "Test", "Home")</li>
 					<li class="@(ViewBag.ActiveMenuTitle == "AjaxPaging" ? "active" : string.Empty)">@Html.ActionLink("Ajax paging", "AjaxPaging", "Home")</li>
 					<li class="@(ViewBag.ActiveMenuTitle == "About" ? "active" : string.Empty)">@Html.ActionLink("About", "About", "Home")</li>
 				</ul>
