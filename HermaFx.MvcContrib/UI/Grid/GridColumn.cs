@@ -29,7 +29,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		private List<Func<GridRowViewData<T>, IDictionary<string, object>>> _attributes = new List<Func<GridRowViewData<T>, IDictionary<string, object>>>();
 		private bool _sortable = true;
 		private string _sortColumnName = null;
-		private SortDirection? _initialDirection; 
+		private SortDirection? _initialDirection;
 		private int? _position;
 		private Func<object, object> _headerRenderer = x => null;
 
@@ -88,7 +88,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		}
 
 		/// <summary>
-		/// The type of the object being rendered for thsi column. 
+		/// The type of the object being rendered for thsi column.
 		/// Note: this will return null if the type cannot be inferred.
 		/// </summary>
         public Type ColumnType
@@ -216,7 +216,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		}
 
 		//TODO: Jeremy to remove after next release
-		[Obsolete("Use Encode(false) instead.")] 
+		[Obsolete("Use Encode(false) instead.")]
 		public IGridColumn<T> DoNotEncode()
 		{
 			return Encode(false);
@@ -252,7 +252,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 			{
 				return null;
 			}
-		    
+
 			var value = _columnValueFunc(instance);
 
 			if(!string.IsNullOrEmpty(_format))
@@ -263,6 +263,28 @@ namespace HermaFx.MvcContrib.UI.Grid
 			if(_htmlEncode && value != null && !(value is IHtmlString))
 			{
 				value = HttpUtility.HtmlEncode(value.ToString());
+			}
+
+			return value;
+		}
+
+		/// <summary>
+		/// Gets the value for a particular cell in this column
+		/// </summary>
+		/// <param name="instance">Instance from which the value should be obtained</param>
+		/// <returns>Item to be rendered</returns>
+		public object GetRawValue(T instance)
+		{
+			if (!_cellCondition(instance))
+			{
+				return null;
+			}
+
+			var value = _columnValueFunc(instance);
+
+			if (!string.IsNullOrEmpty(_format))
+			{
+				value = string.Format(_format, value);
 			}
 
 			return value;

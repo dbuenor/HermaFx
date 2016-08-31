@@ -13,7 +13,7 @@ namespace HermaFx.MvcContrib.UI.Grid.ActionSyntax
 		/// </summary>
 		/// <param name="grid">The grid</param>
 		/// <param name="block">Action that renders the HTML.</param>
-		[Obsolete("Please use the RowStart overload that takes a razor template.")]		
+		[Obsolete("Please use the RowStart overload that takes a razor template.")]
 		public static IGridWithOptions<T> RowStart<T>(this IGridWithOptions<T> grid, Action<T> block) where T : class
 		{
 			grid.Model.Sections.RowStart(block);
@@ -66,7 +66,7 @@ namespace HermaFx.MvcContrib.UI.Grid.ActionSyntax
 		}
 
 		[Obsolete("Please use the RowEnd overload that takes a razor template.")]
-		public static void RowEnd<T>(this IGridSections<T> sections, Action<T> block) where T : class 
+		public static void RowEnd<T>(this IGridSections<T> sections, Action<T> block) where T : class
 		{
 			sections.Row.EndSectionRenderer = (rowData, context) =>
 			{

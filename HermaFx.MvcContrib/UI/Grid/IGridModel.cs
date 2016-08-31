@@ -7,7 +7,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 	/// <summary>
 	/// Defines a grid model
 	/// </summary>
-	public interface IGridModel<T> where T: class 
+	public interface IGridModel<T> where T: class
 	{
 		IGridRenderer<T> Renderer { get; set; }
 		IList<GridColumn<T>> Columns { get; }

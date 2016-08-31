@@ -54,15 +54,15 @@ namespace HermaFx.MvcContrib.UI.Grid
 
 			foreach (var column in builder)
 			{
-				if (column.Position == null) 
+				if (column.Position == null)
 				{
 					_gridModel.Columns.Add(column);
-				} 
+				}
 				else
 				{
-					_gridModel.Columns.Insert(column.Position.Value, column);	
+					_gridModel.Columns.Insert(column.Position.Value, column);
 				}
-            }
+			}
 
 			return this;
 		}

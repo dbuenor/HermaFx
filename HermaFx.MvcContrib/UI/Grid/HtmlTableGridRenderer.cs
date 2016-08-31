@@ -16,7 +16,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 
 		public HtmlTableGridRenderer(ViewEngineCollection engines) : base(engines)
 		{
-			
+
 		}
 		public HtmlTableGridRenderer() {}
 

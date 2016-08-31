@@ -7,7 +7,7 @@ namespace HermaFx.MvcContrib.UI.Grid
     /// <summary>
     /// A renderer responsible for rendering a grid.
     /// </summary>
-	public interface IGridRenderer<T> where T:class 
+	public interface IGridRenderer<T> where T:class
 	{
 		/// <summary>
 		/// Renders a grid

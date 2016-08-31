@@ -18,7 +18,6 @@ namespace HermaFx.MvcContrib.UI.Grid
 
 		public ColumnBuilder() : this(ModelMetadataProviders.Current)
 		{
-			
 		}
 
 		private ColumnBuilder(ModelMetadataProvider metadataProvider)
@@ -53,7 +52,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 			if(declaringType != null)
 			{
 				var metadata = _metadataProvider.GetMetadataForProperty(null, declaringType, inferredName);
-				
+
 				if (!string.IsNullOrEmpty(metadata.DisplayName))
 				{
 					column.Named(metadata.DisplayName);
@@ -85,7 +84,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		{
 			return GetEnumerator();
 		}
-		
+
 		public static MemberExpression GetMemberExpression(LambdaExpression expression)
 		{
 			return RemoveUnary(expression.Body) as MemberExpression;
@@ -104,7 +103,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 
 		private static Type GetTypeFromMemberInfo<TMember>(MemberInfo member, Func<TMember, Type> func) where TMember : MemberInfo 
 		{
-			if (member is TMember) 
+			if (member is TMember)
 			{
 				return func((TMember)member);
 			}

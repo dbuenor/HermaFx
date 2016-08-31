@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
+
+using HermaFx.MvcContrib.UI.Html;
 
 namespace HermaFx.MvcContrib.UI.Grid
 {
@@ -17,12 +21,12 @@ namespace HermaFx.MvcContrib.UI.Grid
 		private TextWriter _writer;
 		private readonly ViewEngineCollection _engines;
 
-		protected  TextWriter Writer
+		protected TextWriter Writer
 		{
 			get { return _writer; }
 		}
 
-		protected GridRenderer() : this(ViewEngines.Engines) {}
+		protected GridRenderer() : this(ViewEngines.Engines) { }
 
 		protected GridRenderer(ViewEngineCollection engines)
 		{
@@ -39,7 +43,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 			RenderGridStart();
 			bool hasItems = RenderHeader();
 
-			if(hasItems)
+			if (hasItems)
 			{
 				RenderItems();
 			}
@@ -61,7 +65,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 			RenderBodyStart();
 
 			bool isAlternate = false;
-			foreach(var item in DataSource)
+			foreach (var item in DataSource)
 			{
 				RenderItem(new GridRowViewData<T>(item, isAlternate));
 				isAlternate = !isAlternate;
@@ -74,57 +78,78 @@ namespace HermaFx.MvcContrib.UI.Grid
 		{
 			BaseRenderRowStart(rowData);
 
-			foreach(var column in VisibleColumns())
+			HtmlHelper<T> html = new HtmlHelper<T>(Context, new ViewPage());
+
+			foreach (var column in VisibleColumns())
 			{
 				//A custom item section has been specified - render it and continue to the next iteration.
-#pragma warning disable 612,618
+#pragma warning disable 612, 618
 				// TODO: CustomItemRenderer is obsolete in favour of custom columns. Remove this after next release.
 				if (column.CustomItemRenderer != null)
 				{
 					column.CustomItemRenderer(new RenderingContext(Writer, Context, _engines), rowData.Item);
 					continue;
 				}
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
 
 				RenderStartCell(column, rowData);
-				RenderCellValue(column, rowData);
+				RenderCellValueUsingDisplayTemplate(column, rowData, html);
 				RenderEndCell();
 			}
 
 			BaseRenderRowEnd(rowData);
 		}
 
+		protected virtual void RenderCellValueUsingDisplayTemplate(GridColumn<T> column, GridRowViewData<T> rowData, HtmlHelper<T> html)
+		{
+			if (column.ColumnType != typeof(object))
+			{
+				var cell = new GridCell()
+				{
+					Value = column.GetRawValue(rowData.Item)
+				};
+
+				var cellValue = html.DisplayFor(x => cell.Value);
+
+				if (cellValue?.ToString() != null)
+				{
+					RenderText(cellValue.ToString());
+					return;
+				}
+			}
+
+			RenderCellValue(column, rowData);
+		}
+
 		protected virtual void RenderCellValue(GridColumn<T> column, GridRowViewData<T> rowData)
 		{
 			var cellValue = column.GetValue(rowData.Item);
 
-			if(cellValue != null)
-			{
+			if (cellValue != null)
 				RenderText(cellValue.ToString());
-			}
 		}
 
 		protected virtual bool RenderHeader()
 		{
 			//No items - do not render a header.
-			if(! ShouldRenderHeader()) return false;
+			if (!ShouldRenderHeader()) return false;
 
 			RenderHeadStart();
 
-			foreach(var column in VisibleColumns())
+			foreach (var column in VisibleColumns())
 			{
 
 				//Allow for custom header overrides.
-#pragma warning disable 612,618
-				if(column.CustomHeaderRenderer != null)
+#pragma warning disable 612, 618
+				if (column.CustomHeaderRenderer != null)
 				{
 					column.CustomHeaderRenderer(new RenderingContext(Writer, Context, _engines));
 				}
-#pragma warning restore 612,618
+#pragma warning restore 612, 618
 				else
 				{
 					RenderHeaderCellStart(column);
-                    RenderHeaderText(column);
+					RenderHeaderText(column);
 					RenderHeaderCellEnd();
 				}
 			}
@@ -134,8 +159,8 @@ namespace HermaFx.MvcContrib.UI.Grid
 			return true;
 		}
 
-        protected virtual void RenderHeaderText(GridColumn<T> column)
-        {
+		protected virtual void RenderHeaderText(GridColumn<T> column)
+		{
 			var customHeader = column.GetHeader();
 
 			if (customHeader != null)
@@ -146,7 +171,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 			{
 				RenderText(column.DisplayName);
 			}
-        }
+		}
 
 		protected virtual bool ShouldRenderHeader()
 		{
@@ -167,7 +192,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		{
 			bool rendered = GridModel.Sections.Row.StartSectionRenderer(rowData, new RenderingContext(Writer, Context, _engines));
 
-			if(! rendered)
+			if (!rendered)
 			{
 				RenderRowStart(rowData);
 			}
@@ -177,7 +202,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		{
 			bool rendered = GridModel.Sections.Row.EndSectionRenderer(rowData, new RenderingContext(Writer, Context, _engines));
 
-			if(! rendered)
+			if (!rendered)
 			{
 				RenderRowEnd();
 			}

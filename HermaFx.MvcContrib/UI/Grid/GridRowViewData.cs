@@ -1,4 +1,4 @@
-namespace HermaFx.MvcContrib.UI.Grid
+namespace MvcContrib.UI.Grid
 {
 	/// <summary>
 	/// Used as viewdata for partials rendered for RowStart/RowEnd
@@ -9,7 +9,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		/// The current item for this row in the data source.
 		/// </summary>
 		public T Item { get; private set; }
-		
+
 		/// <summary>
 		/// Whether this is an alternating row
 		/// </summary>

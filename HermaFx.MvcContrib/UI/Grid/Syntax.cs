@@ -6,7 +6,7 @@ using HermaFx.MvcContrib.Sorting;
 
 namespace HermaFx.MvcContrib.UI.Grid.Syntax
 {
-	public interface IGrid<T> : IGridWithOptions<T> where T: class 
+	public interface IGrid<T> : IGridWithOptions<T> where T : class
 	{
 		/// <summary>
 		/// Specifies a custom GridModel to use.
@@ -16,7 +16,7 @@ namespace HermaFx.MvcContrib.UI.Grid.Syntax
 		IGrid<T> WithModel(IGridModel<T> model);
 	}
 
-	public interface IGridWithOptions<T> : IHtmlString where T : class 
+	public interface IGridWithOptions<T> : IHtmlString where T : class
 	{
 		/// <summary>
 		/// The GridModel that holds the internal representation of this grid.
@@ -32,7 +32,7 @@ namespace HermaFx.MvcContrib.UI.Grid.Syntax
 		IGridWithOptions<T> RenderUsing(IGridRenderer<T> renderer);
 
 		/// <summary>
-		/// Specifies the columns to use. 
+		/// Specifies the columns to use.
 		/// </summary>
 		/// <param name="columnBuilder"></param>
 		/// <returns></returns>
@@ -74,7 +74,7 @@ namespace HermaFx.MvcContrib.UI.Grid.Syntax
 		/// <summary>
 		/// Specifies that the grid is sorted. Column links will have the specified prefix prepended.
 		/// </summary>
-		IGridWithOptions<T> Sort(GridSortOptions sortOptions, string prefix); 
+		IGridWithOptions<T> Sort(GridSortOptions sortOptions, string prefix);
 
 		/// <summary>
 		/// Renders the grid to the TextWriter specified at creation

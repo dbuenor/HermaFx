@@ -14,13 +14,13 @@ namespace HermaFx.MvcContrib.UI.Grid
 		private Func<GridRowViewData<T>, RenderingContext, bool> _endSectionRenderer = (x, y) => false;
 
 		/// <summary>
-		/// Invokes the custom renderer defined (if any) for the start of the row. 
+		/// Invokes the custom renderer defined (if any) for the start of the row.
 		/// Returns TRUE if custom rendering occurred (indicating that further rendering should stop) otherwise FALSE.
 		/// </summary>
 		public Func<GridRowViewData<T>, RenderingContext, bool> StartSectionRenderer
 		{
 			get { return _startSectionRenderer; }
-			set { _startSectionRenderer = value; } 
+			set { _startSectionRenderer = value; }
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		{
 			get { return _attributes; }
 			set { _attributes = value; }
-		} 
+		}
 
 	}
 }
