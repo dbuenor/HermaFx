@@ -1,6 +1,6 @@
-﻿using MvcContrib.UI.Html;
+﻿using HermaFx.MvcContrib.UI.Html;
 
-namespace MvcContrib.UI.Grid
+namespace HermaFx.MvcContrib.UI.Grid
 {
 	public class GridCell
 	{

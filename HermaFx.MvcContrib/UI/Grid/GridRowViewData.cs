@@ -1,4 +1,4 @@
-namespace MvcContrib.UI.Grid
+namespace HermaFx.MvcContrib.UI.Grid
 {
 	/// <summary>
 	/// Used as viewdata for partials rendered for RowStart/RowEnd
