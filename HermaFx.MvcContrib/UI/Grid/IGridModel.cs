@@ -16,6 +16,6 @@ namespace HermaFx.MvcContrib.UI.Grid
 		IDictionary<string, object> Attributes { get; set; }
 		GridSortOptions SortOptions { get; set; }
 		string SortPrefix { get; set; }
-		bool UseDisplayTemplate { get; set; }
+		bool UseDisplayTemplates { get; set; }
 	}
 }

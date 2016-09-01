@@ -128,9 +128,9 @@ namespace HermaFx.MvcContrib.UI.Grid
 			return this;
 		}
 
-		public IGridWithOptions<T> UseDisplayTemplate(bool useDisplayTeamplate)
+		public IGridWithOptions<T> UseDisplayTemplates(bool useDisplayTeamplates)
 		{
-			_gridModel.UseDisplayTemplate = useDisplayTeamplate;
+			_gridModel.UseDisplayTemplates = useDisplayTeamplates;
 			return this;
 		}
 	}

@@ -100,7 +100,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 
 		protected virtual void RenderCellValue(GridColumn<T> column, GridRowViewData<T> rowData)
 		{
-			if (GridModel.UseDisplayTemplate)
+			if (GridModel.UseDisplayTemplates)
 				RenderCellValueUsingDisplayTemplate(column, rowData);
 			else
 				RenderCellValueWithoutTemplate(column, rowData);

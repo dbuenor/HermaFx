@@ -86,7 +86,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 			get { return _sections; }
 		}
 
-		public bool UseDisplayTemplate
+		public bool UseDisplayTemplates
 		{
 			get { return _useDisplayTemplate; }
 			set { _useDisplayTemplate = value; }
