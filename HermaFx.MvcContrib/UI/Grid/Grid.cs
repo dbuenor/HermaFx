@@ -127,5 +127,11 @@ namespace HermaFx.MvcContrib.UI.Grid
 			_gridModel.Sections.RowAttributes(attributes);
 			return this;
 		}
+
+		public IGridWithOptions<T> UseDisplayTemplate(bool useDisplayTeamplate)
+		{
+			_gridModel.UseDisplayTemplate = useDisplayTeamplate;
+			return this;
+		}
 	}
 }

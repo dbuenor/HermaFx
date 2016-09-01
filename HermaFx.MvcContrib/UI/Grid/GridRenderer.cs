@@ -78,8 +78,6 @@ namespace HermaFx.MvcContrib.UI.Grid
 		{
 			BaseRenderRowStart(rowData);
 
-			HtmlHelper<T> html = new HtmlHelper<T>(Context, new ViewPage());
-
 			foreach (var column in VisibleColumns())
 			{
 				//A custom item section has been specified - render it and continue to the next iteration.
@@ -93,14 +91,22 @@ namespace HermaFx.MvcContrib.UI.Grid
 #pragma warning restore 612, 618
 
 				RenderStartCell(column, rowData);
-				RenderCellValueUsingDisplayTemplate(column, rowData, html);
+				RenderCellValue(column, rowData);
 				RenderEndCell();
 			}
 
 			BaseRenderRowEnd(rowData);
 		}
 
-		protected virtual void RenderCellValueUsingDisplayTemplate(GridColumn<T> column, GridRowViewData<T> rowData, HtmlHelper<T> html)
+		protected virtual void RenderCellValue(GridColumn<T> column, GridRowViewData<T> rowData)
+		{
+			if (GridModel.UseDisplayTemplate)
+				RenderCellValueUsingDisplayTemplate(column, rowData);
+			else
+				RenderCellValueWithoutTemplate(column, rowData);
+		}
+
+		protected virtual void RenderCellValueUsingDisplayTemplate(GridColumn<T> column, GridRowViewData<T> rowData)
 		{
 			if (column.ColumnType != typeof(object))
 			{
@@ -109,6 +115,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 					Value = column.GetRawValue(rowData.Item)
 				};
 
+				var html = new HtmlHelper<T>(Context, new ViewPage());
 				var cellValue = html.DisplayFor(x => cell.Value);
 
 				if (cellValue?.ToString() != null)
@@ -118,10 +125,10 @@ namespace HermaFx.MvcContrib.UI.Grid
 				}
 			}
 
-			RenderCellValue(column, rowData);
+			RenderCellValueWithoutTemplate(column, rowData);
 		}
 
-		protected virtual void RenderCellValue(GridColumn<T> column, GridRowViewData<T> rowData)
+		protected virtual void RenderCellValueWithoutTemplate(GridColumn<T> column, GridRowViewData<T> rowData)
 		{
 			var cellValue = column.GetValue(rowData.Item);
 

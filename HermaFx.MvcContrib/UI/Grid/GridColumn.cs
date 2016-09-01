@@ -248,22 +248,10 @@ namespace HermaFx.MvcContrib.UI.Grid
 		/// <returns>Item to be rendered</returns>
 		public object GetValue(T instance)
 		{
-			if(! _cellCondition(instance))
-			{
-				return null;
-			}
-
-			var value = _columnValueFunc(instance);
-
-			if(!string.IsNullOrEmpty(_format))
-			{
-				value = string.Format(_format, value);
-			}
+			var value = GetRawValue(instance);
 
 			if(_htmlEncode && value != null && !(value is IHtmlString))
-			{
 				value = HttpUtility.HtmlEncode(value.ToString());
-			}
 
 			return value;
 		}
@@ -276,16 +264,12 @@ namespace HermaFx.MvcContrib.UI.Grid
 		public object GetRawValue(T instance)
 		{
 			if (!_cellCondition(instance))
-			{
 				return null;
-			}
 
 			var value = _columnValueFunc(instance);
 
 			if (!string.IsNullOrEmpty(_format))
-			{
 				value = string.Format(_format, value);
-			}
 
 			return value;
 		}

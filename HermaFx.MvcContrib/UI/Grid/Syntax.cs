@@ -82,5 +82,12 @@ namespace HermaFx.MvcContrib.UI.Grid.Syntax
 		/// <returns></returns>
 		void Render();
 
+		/// <summary>
+		/// Indicates when rendering cell values, to use or not Display Templates
+		/// </summary>
+		/// <param name="useDisplayTemplate">Boolean value to indicate use of Display or not</param>
+		/// <returns></returns>
+		IGridWithOptions<T> UseDisplayTemplate(bool useDisplayTemplate);
+
 	}
 }

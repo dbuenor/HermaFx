@@ -16,6 +16,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		private IDictionary<string, object> _attributes = new Dictionary<string, object>();
 		private GridSortOptions _sortOptions;
 		private string _sortPrefix;
+		private bool _useDisplayTemplate;
 
 		GridSortOptions IGridModel<T>.SortOptions
 		{
@@ -85,6 +86,12 @@ namespace HermaFx.MvcContrib.UI.Grid
 			get { return _sections; }
 		}
 
+		public bool UseDisplayTemplate
+		{
+			get { return _useDisplayTemplate; }
+			set { _useDisplayTemplate = value; }
+		}
+
 		/// <summary>
 		/// Text that will be displayed when the grid has no data.
 		/// </summary>
@@ -113,7 +120,7 @@ namespace HermaFx.MvcContrib.UI.Grid
 		}
 
 		/// <summary>
-		/// Specifies the Renderer to use with this grid. If omitted, the HtmlTableGridRenderer will be used. 
+		/// Specifies the Renderer to use with this grid. If omitted, the HtmlTableGridRenderer will be used.
 		/// </summary>
 		/// <param name="renderer">The Renderer to use</param>
 		public void RenderUsing(IGridRenderer<T> renderer)
